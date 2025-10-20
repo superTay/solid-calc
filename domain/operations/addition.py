@@ -7,9 +7,11 @@ from ..validation.validators import require_at_least, require_numbers
 
 
 class Addition(Operation):
-    """Sum all provided operands.
+    """Add numbers together and return the total.
 
-    Requires at least one operand.
+    Easy explanation:
+    - Give me 1 or more numbers and I will sum them.
+    - If you forget to pass numbers, I will raise a clear error.
     """
 
     def execute(self, *operands: float) -> float:

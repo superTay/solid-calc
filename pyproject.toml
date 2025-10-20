@@ -50,3 +50,4 @@ packages = [
 
 [project.scripts]
 calc = "application.cli:main"
+calc-repl = "application.repl:main"

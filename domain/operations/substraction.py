@@ -5,9 +5,12 @@ from ..validation.validators import require_at_least, require_numbers
 
 
 class Substraction(Operation):
-    """Subtract subsequent operands from the first.
+    """Subtract numbers in order: start with the first, minus the rest.
 
-    Requires at least one operand. With one operand, returns it.
+    Easy explanation:
+    - With one number, the answer is that number.
+    - With many numbers, we do: first - second - third - ...
+    - If no numbers are given, we raise a clear error.
     """
 
     def execute(self, *operands: float) -> float:

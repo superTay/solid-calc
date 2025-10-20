@@ -11,9 +11,16 @@ from ..validation.errors import InvalidValueError
 
 
 class OperationFactory:
-    """Factory to create `Operation` instances from a symbol.
+    """Create operation objects from a simple text symbol.
 
-    Supports registration to extend with new operations.
+    Plain-English idea:
+    - You give me a symbol like "+" or "*".
+    - I look up which class does that math.
+    - I build it and hand it back to you.
+
+    Why this is helpful:
+    - The rest of the program doesn't need "if symbol == '+'" chains.
+    - Adding a new operation is as easy as registering it once.
     """
 
     def __init__(self) -> None:
@@ -25,14 +32,25 @@ class OperationFactory:
         }
 
     def register(self, symbol: str, builder: Callable[[], Operation]) -> None:
+        """Connect a new symbol with a function/class that builds an operation.
+
+        Example:
+            factory.register("^", Power)
+
+        Later, ``factory.create("^")`` will return ``Power()``.
+        """
         if not symbol or not isinstance(symbol, str):
             raise InvalidValueError("Symbol must be a non-empty string")
         self._registry[symbol] = builder
 
     def create(self, symbol: str) -> Operation:
+        """Build the operation that matches ``symbol``.
+
+        Raises:
+            InvalidValueError: if the symbol is unknown.
+        """
         try:
             builder = self._registry[symbol]
         except KeyError as exc:
             raise InvalidValueError(f"Unknown operation symbol: {symbol!r}") from exc
         return builder()
-

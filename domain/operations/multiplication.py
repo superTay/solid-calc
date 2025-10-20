@@ -5,9 +5,11 @@ from ..validation.validators import require_at_least, require_numbers
 
 
 class Multiplication(Operation):
-    """Multiply all provided operands.
+    """Multiply numbers together and return the product.
 
-    Requires at least one operand.
+    Easy explanation:
+    - Start with 1, then multiply by each number in order.
+    - Needs at least one number or we raise a clear error.
     """
 
     def execute(self, *operands: float) -> float:
