@@ -47,3 +47,6 @@ packages = [
   "application",
   "application.services",
 ]
+
+[project.scripts]
+calc = "application.cli:main"
