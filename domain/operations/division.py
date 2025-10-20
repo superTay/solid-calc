@@ -5,10 +5,13 @@ from ..validation.validators import require_at_least, require_numbers, require_n
 
 
 class Division(Operation):
-    """Divide the first operand by subsequent operands in order.
+    """Divide the first number by each next number in order.
 
-    Requires at least one operand. With one operand, returns it.
-    Raises ZeroDivisionError if any divisor is zero.
+    Easy explanation:
+    - With one number, we just return it.
+    - With many numbers, we do: first / second / third / ...
+    - If any divisor is 0, we raise a division-by-zero error.
+    - Needs at least one number.
     """
 
     def execute(self, *operands: float) -> float:
