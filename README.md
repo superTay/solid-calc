@@ -2,6 +2,17 @@
 
 Calculadora modular que aplica los patrones Strategy (operaciones) y Factory (creación por símbolo), con validación de dominio, servicio de aplicación y un CLI simple.
 
+## UI (Tkinter)
+- Requisitos: Python 3.11+ y Tkinter (suele venir con Python estándar).
+- Ejecutar:
+  - Activar entorno: `conda activate <ENV_NAME>`
+  - Lanzar: `python ui/app.py`
+
+Arquitectura UI:
+- UI: `ui/app.py` (ventana Tkinter con display y keypad).
+- Evaluador: `domain/evaluator.py` parsea expresiones simples y delega a operaciones mediante `OperationFactory`.
+- Operaciones de dominio: `domain/operations/*` (`Addition`, `Substraction`, `Multiplication`, `Division`) implementan `execute(*operands)`.
+
 ## Estructura
 - `domain/`
   - `operations/`: interfaz `Operation` y estrategias (`Addition`, `Substraction`, `Multiplication`, `Division`).
@@ -69,5 +80,5 @@ mypy .
 ## Próximos pasos
 - Añadir más operaciones (potencia, módulo, media) y registrarlas en la factory.
 - CLI interactivo (REPL) o interfaz gráfica opcional.
+- Abrir Pull Request desde `feature/ui` hacia `main` cuando la UI esté validada.
 - Ejemplos avanzados y casos de uso en el README.
-
