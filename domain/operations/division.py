@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from .interface import Operation
+from ..validation.validators import require_at_least, require_numbers, require_nonzero_divisors
 
 
 class Division(Operation):
@@ -11,14 +12,13 @@ class Division(Operation):
     """
 
     def execute(self, *operands: float) -> float:
-        if not operands:
-            raise ValueError("Division requires at least one operand")
-        it = iter(operands)
+        require_at_least(operands, 1, "Division")
+        require_numbers(operands, "Division")
+        if len(operands) > 1:
+            require_nonzero_divisors(operands[1:], "Division")
+
+        it = iter(float(x) for x in operands)
         result = float(next(it))
-        for value in it:
-            divisor = float(value)
-            if divisor == 0.0:
-                raise ZeroDivisionError("Division by zero")
+        for divisor in it:
             result /= divisor
         return result
-

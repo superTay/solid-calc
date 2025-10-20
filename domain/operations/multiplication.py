@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from .interface import Operation
+from ..validation.validators import require_at_least, require_numbers
 
 
 class Multiplication(Operation):
@@ -10,10 +11,9 @@ class Multiplication(Operation):
     """
 
     def execute(self, *operands: float) -> float:
-        if not operands:
-            raise ValueError("Multiplication requires at least one operand")
+        require_at_least(operands, 1, "Multiplication")
+        require_numbers(operands, "Multiplication")
         result = 1.0
-        for value in operands:
-            result *= float(value)
+        for value in (float(x) for x in operands):
+            result *= value
         return result
-
