@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from ...domain.factory.operation_factory import OperationFactory
+from domain.factory.operation_factory import OperationFactory
 
 
 class CalculatorService:
@@ -14,4 +14,3 @@ class CalculatorService:
     def calculate(self, symbol: str, *operands: float) -> float:
         operation = self._factory.create(symbol)
         return operation.execute(*operands)
-

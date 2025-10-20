@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: solid-calc
+Version: 0.1.0
+Summary: Calculator with Strategy and Factory patterns
+Author: superTay
+License: Proprietary
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
