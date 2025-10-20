@@ -1,5 +1,6 @@
 pyproject.toml
 application/__init__.py
+application/cli.py
 application/services/__init__.py
 application/services/calculator_service.py
 domain/__init__.py
@@ -17,5 +18,7 @@ domain/validation/validators.py
 solid_calc.egg-info/PKG-INFO
 solid_calc.egg-info/SOURCES.txt
 solid_calc.egg-info/dependency_links.txt
+solid_calc.egg-info/entry_points.txt
 solid_calc.egg-info/top_level.txt
+tests/test_cli.py
 tests/test_factory_and_service.py
