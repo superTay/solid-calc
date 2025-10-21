@@ -13,6 +13,29 @@ def evaluate_expression(expr: str):
         op = OperationFactory().create('+')
         return op.execute(*numbers)
 
+    # Potencia '^' (binario o n-ario izquierda->derecha)
+    if '^' in expr:
+        parts = [p.strip() for p in expr.split('^') if p.strip()]
+        numbers = [float(p) for p in parts]
+        op = OperationFactory().create('^')
+        return op.execute(*numbers)
+
+    # Raíz cuadrada: soporta forma textual 'sqrt NUM' o 'sqrt(NUM)'
+    if expr.startswith('sqrt'):
+        inside = expr[4:].strip()
+        if inside.startswith('(') and inside.endswith(')'):
+            inside = inside[1:-1].strip()
+        # Permitir cadena de "sqrt sqrt 9" como múltiples operandos
+        # Normalizamos espacios múltiples
+        tokens = [t for t in inside.replace(',', ' ').split() if t]
+        # Si hay varios números, aplicamos sqrt encadenado, comenzando por el primero
+        if not tokens:
+            raise ValueError("sqrt requires at least one operand")
+        # Interpreta todos los tokens como números; si hay más de uno, encadena
+        numbers = [float(t) for t in tokens]
+        op = OperationFactory().create('sqrt')
+        return op.execute(*numbers)
+
     # Operadores binarios: '-', '*', '/'
     for symbol in ('-', '*', '/'):
         if symbol in expr:
