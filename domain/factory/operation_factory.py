@@ -7,6 +7,8 @@ from ..operations.addition import Addition
 from ..operations.substraction import Substraction
 from ..operations.multiplication import Multiplication
 from ..operations.division import Division
+from ..operations.power import Power
+from ..operations.sqrt import Sqrt
 from ..validation.errors import InvalidValueError
 
 
@@ -29,6 +31,8 @@ class OperationFactory:
             "-": Substraction,
             "*": Multiplication,
             "/": Division,
+            "^": Power,
+            "sqrt": Sqrt,
         }
 
     def register(self, symbol: str, builder: Callable[[], Operation]) -> None:
