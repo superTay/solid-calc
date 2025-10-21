@@ -13,6 +13,20 @@ Arquitectura UI:
 - Evaluador: `domain/evaluator.py` parsea expresiones simples y delega a operaciones mediante `OperationFactory`.
 - Operaciones de dominio: `domain/operations/*` (`Addition`, `Substraction`, `Multiplication`, `Division`) implementan `execute(*operands)`.
 
+## Extended Operations (English)
+New domain operations have been added and are available through the evaluator and factory:
+- Power (`^`): `domain/operations/power.py` — supports n-ary left-to-right exponentiation, e.g. `2^3^2`.
+- Square root (`sqrt`): `domain/operations/sqrt.py` — unary, chainable. Accepts `sqrt 9` or `sqrt(16)`. Negative values raise an error.
+
+How to try them:
+- UI: launch `python ui/app.py` and type `2^3`, `2^3^2`, `sqrt 9`, `sqrt(16)`.
+- CLI (service-based): `python -m application.cli '^' 2 3` or `python -m application.cli sqrt 9`.
+
+Design notes:
+- The UI remains decoupled and delegates to `domain/evaluator.py`.
+- `domain/factory/operation_factory.py` registers symbols `^` and `sqrt` and returns the appropriate operation classes.
+- Validations reuse existing domain validators (arity, numbers); sqrt rejects negative inputs.
+
 ## Estructura
 - `domain/`
   - `operations/`: interfaz `Operation` y estrategias (`Addition`, `Substraction`, `Multiplication`, `Division`).
